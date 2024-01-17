@@ -15,7 +15,7 @@
       const updateData = async () => {
           const response = await fetch(updateUrl);
           const data = await response.json()
-          const { position } = data;
+          const { position, state } = data;
 
           document.querySelector('#app').className = state;
 
