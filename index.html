@@ -8,7 +8,7 @@
     <link href="/style.css" rel="stylesheet">
   </head>
   <body class="fixed w-full h-screen bg-[#00ff00] text-white text-2xl flex flex-col justify-end">
-    <div id="app" class="w-full flex flex-row justify-center"></div>
+    <div id="app" class=""></div>
     <script>
       const updateUrl = '/requests/status.json';
 
@@ -16,7 +16,10 @@
           const response = await fetch(updateUrl);
           const data = await response.json()
           const { position } = data;
-          const { album, artist, artwork_url, filename, title } = data.information.category.meta;
+
+          document.querySelector('#app').className = state;
+
+          const { album, artist, artwork_url, filename, title } = data.information?.category?.meta || {};
 
           document.querySelector('#music-progress #music-elapsed').setAttribute('value', Math.round(position * 100));
           document.querySelector('#music-info #artist').innerHTML = artist ? artist + '&nbsp;-&nbsp;' : '';
@@ -25,14 +28,16 @@
       };
 
       document.querySelector('#app').innerHTML = `
-        <div class="flex flex-col w-full justify-self-stretch">
-          <div id="music-info" class="flex flex-row justify-center">
-            <div id="artist" class="flex"></div>
-            <div id="title" class="flex"></div>
-            <div id="album" class="flex"></div>
-          </div>
-          <div id="music-progress" class="flex px-4">
-            <meter id="music-elapsed" class="w-full" value="0" max="100"></meter>
+        <div class="w-full flex flex-row justify-center">
+          <div id="music-overlay" class="flex flex-col w-full justify-self-stretch">
+            <div id="music-info" class="flex flex-row justify-center">
+              <div id="artist" class="flex"></div>
+              <div id="title" class="flex"></div>
+              <div id="album" class="flex"></div>
+            </div>
+            <div id="music-progress" class="flex px-4">
+              <meter id="music-elapsed" class="w-full" value="0" max="100"></meter>
+            </div>
           </div>
         </div>
       `;

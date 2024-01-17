@@ -10,3 +10,5 @@
 ::-webkit-meter-optimum-value {
   background-color: #fff;
 }
+
+.paused,.stopped{display: none;}.playing{display: flex;}
