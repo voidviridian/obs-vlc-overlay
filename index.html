@@ -10,7 +10,7 @@
   <body class="fixed w-full h-screen bg-[#00ff00] text-white text-2xl flex flex-col justify-end">
     <div id="app" class=""></div>
     <script>
-      const updateUrl = '/requests/status.json';
+      const updateUrl = `http://${window.location.host}/requests/status.json`;
 
       const updateData = async () => {
           const response = await fetch(updateUrl);
